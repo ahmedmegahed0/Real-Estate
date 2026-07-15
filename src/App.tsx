@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
+import { Routes, Route, useNavigate, Outlet, Navigate } from 'react-router-dom';
 import { AuthProvider } from './application/hooks/use-auth';
 import { ClientLayout } from './presentation/components/public/ClientLayout';
 import { HomePage } from './presentation/components/public/HomePage';
@@ -193,6 +193,9 @@ function App() {
             <Route path="leads" element={<LeadsDashboardTable />} />
             <Route path="settings" element={<SettingsPage />} />
           </Route>
+
+          {/* Catch-all route to redirect unknown URLs to Home Page */}
+          <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>
   );
