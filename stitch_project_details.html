@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "surface-container-low": "#f5f3f3",
+                            "surface": "#fbf9f8",
+                            "on-tertiary-fixed-variant": "#5a430e",
+                            "error-container": "#ffdad6",
+                            "on-primary-fixed": "#1a1c1c",
+                            "surface-container-highest": "#e4e2e2",
+                            "on-surface-variant": "#434847",
+                            "on-primary": "#ffffff",
+                            "on-tertiary-container": "#8b7037",
+                            "secondary-fixed": "#e5e2e1",
+                            "error": "#ba1a1a",
+                            "primary-fixed": "#e2e2e2",
+                            "surface-container-high": "#e9e8e7",
+                            "surface-tint": "#5d5f5e",
+                            "on-error-container": "#93000a",
+                            "inverse-surface": "#303031",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "surface-container": "#efeded",
+                            "primary-container": "#fcfcfb",
+                            "on-secondary-container": "#656464",
+                            "secondary-fixed-dim": "#c8c6c5",
+                            "tertiary": "#735b24",
+                            "inverse-on-surface": "#f2f0f0",
+                            "outline": "#747877",
+                            "surface-bright": "#fbf9f8",
+                            "on-surface": "#1b1c1c",
+                            "inverse-primary": "#c6c7c6",
+                            "on-tertiary-fixed": "#261a00",
+                            "on-primary-fixed-variant": "#454747",
+                            "on-tertiary": "#ffffff",
+                            "background": "#fbf9f8",
+                            "surface-dim": "#dbdad9",
+                            "surface-container-lowest": "#ffffff",
+                            "secondary": "#5f5e5e",
+                            "primary-fixed-dim": "#c6c7c6",
+                            "on-secondary-fixed-variant": "#474646",
+                            "surface-variant": "#e4e2e2",
+                            "primary": "#5d5f5e",
+                            "tertiary-fixed-dim": "#e3c281",
+                            "outline-variant": "#c4c7c6",
+                            "on-background": "#1b1c1c",
+                            "on-error": "#ffffff",
+                            "secondary-container": "#e5e2e1",
+                            "on-primary-container": "#737474",
+                            "on-secondary": "#ffffff",
+                            "tertiary-container": "#fffbff",
+                            "tertiary-fixed": "#ffdf9f"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "container-max": "1440px",
+                            "margin-mobile": "24px",
+                            "margin-desktop": "80px",
+                            "gutter": "32px",
+                            "unit": "8px",
+                            "section-gap": "160px"
+                        },
+                        "fontFamily": {
+                            "headline-lg-mobile": ["Playfair Display"],
+                            "label-caps": ["Inter"],
+                            "body-lg": ["Inter"],
+                            "headline-xl": ["Playfair Display"],
+                            "headline-lg": ["Playfair Display"],
+                            "display-xl": ["Playfair Display"],
+                            "display-lg": ["Playfair Display"],
+                            "body-md": ["Inter"]
+                        },
+                        "fontSize": {
+                            "headline-lg-mobile": ["28px", { "lineHeight": "130%", "fontWeight": "400" }],
+                            "label-caps": ["12px", { "lineHeight": "100%", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                            "body-lg": ["18px", { "lineHeight": "170%", "fontWeight": "300" }],
+                            "headline-xl": ["48px", { "lineHeight": "120%", "fontWeight": "400" }],
+                            "headline-lg": ["32px", { "lineHeight": "130%", "fontWeight": "400" }],
+                            "display-xl": ["96px", { "lineHeight": "100%", "letterSpacing": "-0.03em", "fontWeight": "400" }],
+                            "display-lg": ["72px", { "lineHeight": "110%", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+                            "body-md": ["16px", { "lineHeight": "160%", "fontWeight": "400" }]
+                        }
+                    },
+                },
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .reveal-on-scroll { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .reveal-on-scroll.active { opacity: 1; transform: translateY(0); }
+        .hero-gradient { background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-300 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-6 bg-transparent border-b border-white/10" id="mainNav">
+<div class="text-body-md font-headline-xl tracking-tighter text-white transition-colors duration-300" id="navLogo">CREATIVE EYE</div>
+<div class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-white/80 hover:text-white transition-colors" href="#">Home</a>
+<a class="font-label-caps text-label-caps text-white border-b border-white pb-1" href="#">Projects</a>
+<a class="font-label-caps text-label-caps text-white/80 hover:text-white transition-colors" href="#">About Us</a>
+<a class="font-label-caps text-label-caps text-white/80 hover:text-white transition-colors" href="#">Services</a>
+<a class="font-label-caps text-label-caps text-white/80 hover:text-white transition-colors" href="#">Our Process</a>
+<a class="font-label-caps text-label-caps text-white/80 hover:text-white transition-colors" href="#">Contact</a>
+</div>
+<button class="bg-tertiary text-on-tertiary px-6 py-3 font-label-caps text-label-caps hover:scale-105 transition-transform duration-300">
+        Work With Us
+    </button>
+</nav>
+<!-- Hero Banner -->
+<section class="relative h-screen w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDLmsFbcS5VNcAuewv_7wuCLb_87_uNgTz-pgqZ9IHaqreSaLaGw9-aq7-W2k2w_gdIPmL6Zv4qNs-XV5CaCkCF8iN3ePIWtQS9iEkAE4DuC-aRCbLbGPVf9jRphDEQB6iRJ-m6HUBjmisO7SGmTxfd3fqrbqP2RHwQzGI6cz1RjeDq7aZiT-_jUJLvn5NHNSUShOy9yTTNjX1dfDPPNY1yaIDv4Frgu75HxIBEcHo9pztk1FoXSG6g')"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="absolute bottom-24 left-margin-mobile md:left-margin-desktop max-w-4xl">
+<div class="mb-4">
+<span class="inline-block px-4 py-1 bg-tertiary text-on-tertiary font-label-caps text-label-caps">Residential</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-display-xl text-white mb-4">Riverside Residence</h1>
+<p class="font-body-lg text-body-lg text-white/80 max-w-2xl">A masterful blend of brutalist concrete forms and organic wood textures, designed to frame the shifting light of the Egyptian delta.</p>
+</div>
+</section>
+<!-- Main Content -->
+<main class="relative z-10">
+<!-- Project Statistics & Summary -->
+<section class="px-margin-mobile md:px-margin-desktop py-24 grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+<div class="md:col-span-5 reveal-on-scroll">
+<h2 class="font-headline-xl text-headline-xl mb-8">Elevating the <span class="italic text-tertiary">Standard of Living.</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-12">
+                Located in the heart of New Cairo, the Riverside Residence is more than a home; it's a statement of architectural intent. Developed by Elite Estates, this project focuses on the intersection of privacy and expansive views.
+            </p>
+<div class="space-y-6">
+<div class="flex justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Location</span>
+<span class="font-body-md text-body-md">New Cairo, Egypt</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Completion</span>
+<span class="font-body-md text-body-md">December 2024</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant">Plot Area</span>
+<span class="font-body-md text-body-md">1,200 SQM</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-6 md:col-start-7 reveal-on-scroll">
+<div class="aspect-[4/5] bg-cover bg-center shadow-2xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAB07NGK4dCqc5Hy28swng7XpH_lPq6E9f8KUCTP_tXzVE4VSD2Cni4HnnIA0oWaqN92olh6pKEAGWndv8it56q-fTNIuD30PBPVijw1kr-sLFUWH8xboTGf8m33-j5geLIE3qa6IQMJFaH8EHNABrwg7_Hmxo2L2pwe2hIVEZZEZoP2DvWnVRx9mJO3nAfv8jCSWNXoKQTOoZ_HTEWUWNGf-e6XA44L8wyFuUJw6Fz9TGPzs_HONCc')"></div>
+</div>
+</section>
+<!-- High Fidelity Image Gallery -->
+<section class="px-margin-mobile md:px-margin-desktop py-24 bg-surface-container-low">
+<div class="mb-16 reveal-on-scroll text-center md:text-left">
+<h3 class="font-label-caps text-label-caps uppercase text-tertiary mb-4">The Interior Vision</h3>
+<h2 class="font-headline-xl text-headline-xl">Curated Gallery</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+<div class="col-span-2 row-span-2 group overflow-hidden relative reveal-on-scroll cursor-pointer">
+<img alt="Master Bedroom" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi_Oju_M_c5kFpErMSKdIAjtMYne1RjjMEOhBd64MScqWdRnEuMteN9PZ_2r_UJySTa8EgxE5ytDjPDAj0HhujUExnTzrc7KJ8y7inEmaXpjAx548VSY9pKygV_hoTKIBJaz-BXfFWPSPU1KrcUZWZG4D2kuZ1W6V4jJojxUDYLR-1eBkMLIYXGMnzLfIgQF9SvNXGPTidOZvsWe_RXAbpIY4FQ38cbh9CHaP690hgZl8G6ZacC-xB"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+</div>
+</div>
+<div class="group overflow-hidden relative reveal-on-scroll cursor-pointer h-64 md:h-auto">
+<img alt="Kitchen Detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPic9KoCxIHrmcfh3JIDX6farP5lY-JJ389gSLf7g4RVDP54tRap-vloZWDooRWOr_L1nXrmr3B7mr_XF4eoE1DHJUtUTAydGIph8HNvBDSt19RmQU-Op1z3N1FdYv9I115rMEHGyty5nzAWUm6iQZErjy8_G_ygITkhIIFkVvykA5AV8zliAobn6s1PXPeWwIYHwm35WWsz7dJpdkZQlQ2jDJD688ztCW38-pXMEgcKd9xcXJZtr0"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+</div>
+</div>
+<div class="group overflow-hidden relative reveal-on-scroll cursor-pointer h-64 md:h-auto">
+<img alt="Outdoor Lounge" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJpjVpZupJ9NFkxt2P5wlNINzcK_8sgCherk03pve4HFPJ0L2yGnQq9MXOCzzruMKJ_YSbt6V5UqndiK6ND0mLvJ-TWSRGbvh-U43f0-_p9F_PFK_d4AYXRFuHWDcEsAWqBWiybUR0BA-TtAzcRa1sZ0DQwZlEXqJXjK-nUzU5TzThaXUXMe3BN7yQAh_piH56u9GbnKh2ngsmE_vOMipj66Rv5ZU0Q5-Sg8ruPnH6_YV19munAN9N"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+</div>
+</div>
+<div class="group overflow-hidden relative reveal-on-scroll cursor-pointer h-64 md:h-auto">
+<img alt="Private Spa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkuiAgd6ahg_g7KkBji95n_WGqWBljrctwkG6mXz5XkfmrakSfQ31_Fj3F6RM3N2UGvrwCX06GMqEI2uSgg-1301aNosivsP42E8PFpO4FeZidvJAcSxwEQZbitxetuH5Kq8GnYA9GUERgFVyY-tKAeUonD0sqtpHjIuzW5vepq4PJPFADty8MCKKk651ciq-FYCO2ilKzxLzl1QQ4UgARc5eJ6_xdQsgPVtfZ6m_oZ6HpzgMF_UIG"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+</div>
+</div>
+<div class="group overflow-hidden relative reveal-on-scroll cursor-pointer h-64 md:h-auto">
+<img alt="Night View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW-4Lo0g0_g-O2HS1EepowD_7eIJMyos0pT6X9jp7gPomO7cEpZsBgu14u3JU96AqcxB9BiZ33N99RhS-cp3XsRd7xKCZB4QTl8HfdlzjmGJSO6VmLgAvpXva-m1YXNRwwS_5loMgDVkLoToUW1UXLKIvV8u-85hl4vEcwA6wMNGKU_Lnv2iC4n1n_gYjx1cv-_lnSo7-F5nX5X_Jgs1eEQVuIbQ36MoVO2vfwuyP0h2Jn7X2ZxyfI"/>
+<div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Amenities -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="reveal-on-scroll">
+<h2 class="font-headline-xl text-headline-xl mb-12">Designed for <br/><span class="text-tertiary">Modern Distinction.</span></h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+<div class="p-8 border border-outline-variant/20 hover:border-tertiary/50 transition-colors group">
+<span class="material-symbols-outlined text-4xl text-tertiary/30 group-hover:text-tertiary transition-colors mb-6">spa</span>
+<h4 class="font-headline-lg text-headline-lg mb-2">Private Spa</h4>
+<p class="font-body-md text-on-surface-variant">A dedicated wellness wing featuring a temperature-controlled lap pool and sauna.</p>
+</div>
+<div class="p-8 border border-outline-variant/20 hover:border-tertiary/50 transition-colors group">
+<span class="material-symbols-outlined text-4xl text-tertiary/30 group-hover:text-tertiary transition-colors mb-6">smart_toy</span>
+<h4 class="font-headline-lg text-headline-lg mb-2">Smart Core</h4>
+<p class="font-body-md text-on-surface-variant">Fully integrated AI-driven home automation for climate, security, and lighting.</p>
+</div>
+<div class="p-8 border border-outline-variant/20 hover:border-tertiary/50 transition-colors group">
+<span class="material-symbols-outlined text-4xl text-tertiary/30 group-hover:text-tertiary transition-colors mb-6">deck</span>
+<h4 class="font-headline-lg text-headline-lg mb-2">Sky Terrace</h4>
+<p class="font-body-md text-on-surface-variant">A 360-degree viewing platform designed for evening entertainment and galas.</p>
+</div>
+<div class="p-8 border border-outline-variant/20 hover:border-tertiary/50 transition-colors group">
+<span class="material-symbols-outlined text-4xl text-tertiary/30 group-hover:text-tertiary transition-colors mb-6">wine_bar</span>
+<h4 class="font-headline-lg text-headline-lg mb-2">Wine Cellar</h4>
+<p class="font-body-md text-on-surface-variant">Climate-monitored storage for over 500 bottles with a private tasting lounge.</p>
+</div>
+</div>
+</div>
+<div class="hidden md:block relative reveal-on-scroll pl-12">
+<div class="aspect-[4/5] w-full border border-outline-variant/20 p-4 rotate-3 bg-white shadow-xl">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkuiAgd6ahg_g7KkBji95n_WGqWBljrctwkG6mXz5XkfmrakSfQ31_Fj3F6RM3N2UGvrwCX06GMqEI2uSgg-1301aNosivsP42E8PFpO4FeZidvJAcSxwEQZbitxetuH5Kq8GnYA9GUERgFVyY-tKAeUonD0sqtpHjIuzW5vepq4PJPFADty8MCKKk651ciq-FYCO2ilKzxLzl1QQ4UgARc5eJ6_xdQsgPVtfZ6m_oZ6HpzgMF_UIG')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Payment Plans Section -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-highest">
+<div class="max-w-4xl mx-auto text-center mb-16 reveal-on-scroll">
+<h3 class="font-label-caps text-label-caps uppercase text-tertiary mb-4">Investment Tiers</h3>
+<h2 class="font-headline-xl text-headline-xl">Structured Payment Plans</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface p-10 border border-outline-variant/30 reveal-on-scroll flex flex-col justify-between h-full hover:shadow-2xl transition-all">
+<div>
+<h4 class="font-headline-lg text-headline-lg mb-4">Foundation</h4>
+<p class="font-label-caps text-label-caps text-tertiary mb-8">Early Bird Phase</p>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> 10% Down Payment</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> 8 Year Installments</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> 0% Interest</li>
+</ul>
+</div>
+<div class="border-t border-outline-variant/20 pt-8">
+<p class="font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Starting From</p>
+<p class="text-3xl font-headline-xl">8.5M EGP</p>
+</div>
+</div>
+<div class="bg-primary text-on-primary p-10 border border-primary reveal-on-scroll flex flex-col justify-between h-full shadow-2xl scale-105 z-10">
+<div>
+<h4 class="font-headline-lg text-headline-lg mb-4">Signature</h4>
+<p class="font-label-caps text-label-caps text-tertiary-fixed mb-8">Most Preferred</p>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-tertiary-fixed text-xl">check_circle</span> 15% Down Payment</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-tertiary-fixed text-xl">check_circle</span> 6 Year Installments</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-tertiary-fixed text-xl">check_circle</span> Fully Furnished Option</li>
+</ul>
+</div>
+<div class="border-t border-on-primary/20 pt-8">
+<p class="font-label-caps text-label-caps uppercase text-white/60 mb-1">Starting From</p>
+<p class="text-3xl font-headline-xl">12.2M EGP</p>
+</div>
+</div>
+<div class="bg-surface p-10 border border-outline-variant/30 reveal-on-scroll flex flex-col justify-between h-full hover:shadow-2xl transition-all">
+<div>
+<h4 class="font-headline-lg text-headline-lg mb-4">Prestige</h4>
+<p class="font-label-caps text-label-caps text-tertiary mb-8">Immediate Delivery</p>
+<ul class="space-y-4 mb-12">
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> 35% Down Payment</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> 3 Year Installments</li>
+<li class="flex items-center gap-3 font-body-md"><span class="material-symbols-outlined text-primary text-xl">check_circle</span> Private Pool Included</li>
+</ul>
+</div>
+<div class="border-t border-outline-variant/20 pt-8">
+<p class="font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Starting From</p>
+<p class="text-3xl font-headline-xl">18.5M EGP</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Location & Map -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 reveal-on-scroll">
+<div class="max-w-xl">
+<h3 class="font-label-caps text-label-caps uppercase text-tertiary mb-4">Prime Location</h3>
+<h2 class="font-headline-xl text-headline-xl">At the Nexus of <span class="italic">Culture &amp; Calm.</span></h2>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container px-6 py-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">15 MINS</p>
+<p class="font-body-md font-bold">Downtown</p>
+</div>
+<div class="bg-surface-container px-6 py-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant">25 MINS</p>
+<p class="font-body-md font-bold">Intl Airport</p>
+</div>
+</div>
+</div>
+<div class="w-full aspect-[21/9] bg-surface-container-high relative overflow-hidden reveal-on-scroll group">
+<iframe allowfullscreen="" class="absolute inset-0 w-full h-full border-0 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.37809421516!2d31.42436445!3d30.002636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145822b3e5828453%3A0x67396653df329971!2sNew%20Cairo%20City%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1715600000000!5m2!1sen!2seg">
+</iframe>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+<div class="w-12 h-12 bg-tertiary rounded-full animate-ping absolute"></div>
+<div class="w-12 h-12 bg-tertiary rounded-full relative border-4 border-white shadow-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm">home</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Projects -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop border-t border-outline-variant/10">
+<div class="flex justify-between items-center mb-16 reveal-on-scroll">
+<h2 class="font-headline-xl text-headline-xl">Explore Similar <span class="italic">Residences</span></h2>
+<div class="flex gap-2">
+<button class="w-12 h-12 rounded-full border border-outline flex items-center justify-center hover:bg-on-surface hover:text-surface transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-12 h-12 rounded-full border border-outline flex items-center justify-center hover:bg-on-surface hover:text-surface transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-gutter overflow-x-auto scrollbar-hide pb-12 snap-x snap-mandatory">
+<!-- Related 1 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group reveal-on-scroll">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<img alt="Garden City" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy6EeawyWd-14a9m19zvwqBFMOIZs8KWcwuQ9EKU_pY3qr75GXIH9a4F2Jd3EPTI8_ymfusxKB5nZhx4gnA__zR3j26V1AEigyoF5AUT5YqoOfx9VVaAOpi0JH0guX_-n672PXc_SYonHpV2Z4-jyUaJQYNw_-5y_I84CPAxRKCwSsDETKByCiEOb_cnHO_jdHhvDIDefthgLajEoW01tbM5K4jbXTOnlz6Ad-LVhHfpa1UEV4v5EE"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-headline-lg text-headline-lg mb-1">Garden City</h5>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">6th of October</p>
+</div>
+<p class="font-label-caps text-label-caps font-bold">1.8M EGP</p>
+</div>
+</div>
+<!-- Related 2 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group reveal-on-scroll">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<img alt="Skyline Tower" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW-4Lo0g0_g-O2HS1EepowD_7eIJMyos0pT6X9jp7gPomO7cEpZsBgu14u3JU96AqcxB9BiZ33N99RhS-cp3XsRd7xKCZB4QTl8HfdlzjmGJSO6VmLgAvpXva-m1YXNRwwS_5loMgDVkLoToUW1UXLKIvV8u-85hl4vEcwA6wMNGKU_Lnv2iC4n1n_gYjx1cv-_lnSo7-F5nX5X_Jgs1eEQVuIbQ36MoVO2vfwuyP0h2Jn7X2ZxyfI"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-headline-lg text-headline-lg mb-1">Skyline Tower</h5>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Downtown</p>
+</div>
+<p class="font-label-caps text-label-caps font-bold">3.4M EGP</p>
+</div>
+</div>
+<!-- Related 3 -->
+<div class="min-w-[300px] md:min-w-[400px] snap-start group reveal-on-scroll">
+<div class="aspect-[4/5] overflow-hidden mb-6 relative">
+<img alt="Valley Estates" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLmsFbcS5VNcAuewv_7wuCLb_87_uNgTz-pgqZ9IHaqreSaLaGw9-aq7-W2k2w_gdIPmL6Zv4qNs-XV5CaCkCF8iN3ePIWtQS9iEkAE4DuC-aRCbLbGPVf9jRphDEQB6iRJ-m6HUBjmisO7SGmTxfd3fqrbqP2RHwQzGI6cz1RjeDq7aZiT-_jUJLvn5NHNSUShOy9yTTNjX1dfDPPNY1yaIDv4Frgu75HxIBEcHo9pztk1FoXSG6g"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h5 class="font-headline-lg text-headline-lg mb-1">Valley Estates</h5>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">New Zayed</p>
+</div>
+<p class="font-label-caps text-label-caps font-bold">4.6M EGP</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest w-full pt-section-gap pb-12 border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-1">
+<div class="font-headline-lg text-headline-lg text-primary mb-8">CREATIVE EYE</div>
+<p class="font-body-md text-on-surface-variant pr-8">Redefining luxury real estate marketing through cinematic storytelling and architectural precision.</p>
+</div>
+<div>
+<h6 class="font-label-caps text-label-caps uppercase mb-8">Explore</h6>
+<ul class="space-y-4">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Projects</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">About Us</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Our Process</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Services</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-label-caps text-label-caps uppercase mb-8">Follow</h6>
+<ul class="space-y-4">
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Instagram</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">LinkedIn</a></li>
+<li><a class="font-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Behance</a></li>
+</ul>
+</div>
+<div>
+<h6 class="font-label-caps text-label-caps uppercase mb-8">Contact</h6>
+<p class="font-body-md text-on-surface-variant mb-2">info@creative-eye.com</p>
+<p class="font-body-md text-on-surface-variant">+20 100 123 4567</p>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-24 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-md text-on-surface-variant">© 2024 Creative Eye. All Rights Reserved.</p>
+<div class="flex gap-8">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary" href="#">Privacy Policy</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary" href="#">Terms of Use</a>
+</div>
+</div>
+</footer>
+<!-- Sticky Inquiry Bar -->
+<div class="fixed bottom-0 left-0 w-full z-40 translate-y-full transition-transform duration-500 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]" id="inquiryBar">
+<div class="bg-surface/90 backdrop-blur-3xl border-t border-outline-variant/20 px-margin-mobile md:px-margin-desktop py-5 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-5">
+<div class="w-14 h-14 bg-cover bg-center rounded shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMJScV4BqlsQ0DdmrIAKJ7PprN-GgW9k61hBFwasWe9a0dTOsfAgcgMLSpWqKtds4fN71_ehzZ4haQjNRBwUPcBzOYVxn86i69u4AlBR4yCKxzU_mDczTkEk3InTlmJitcD--z4OnNvbglNHCXuY9JG7dpP5Vr2-ax6nxdhK0_krhGKrNXmuqzNCmYzyH4JgiUAnH1wU4dchRotL2ErrADPU7HAHZLg8283i0XU0-DABo3DsVknkXG')"></div>
+<div class="hidden sm:block">
+<p class="font-label-caps text-label-caps text-on-surface-variant tracking-widest uppercase">Interested in</p>
+<p class="font-body-lg font-bold text-xl">Riverside Residence</p>
+</div>
+</div>
+<div class="flex gap-4 w-full md:w-auto">
+<a class="flex-1 md:flex-none border border-on-surface px-10 py-4 font-label-caps text-label-caps flex items-center justify-center gap-3 hover:bg-on-surface hover:text-surface transition-all duration-300" href="tel:+201001234567">
+<span class="material-symbols-outlined text-sm">call</span>
+                Call Now
+            </a>
+<a class="flex-1 md:flex-none bg-tertiary text-on-tertiary px-10 py-4 font-label-caps text-label-caps flex items-center justify-center gap-3 hover:scale-105 hover:bg-tertiary/90 transition-all duration-300 shadow-lg shadow-tertiary/20" href="https://wa.me/201001234567">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                WhatsApp
+            </a>
+</div>
+</div>
+</div>
+<script>
+    // Reveal on Scroll Logic
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // Sticky Bar Visibility
+    window.addEventListener('scroll', () => {
+        const inquiryBar = document.getElementById('inquiryBar');
+        if (window.scrollY > 600) {
+            inquiryBar.classList.remove('translate-y-full');
+        } else {
+            inquiryBar.classList.add('translate-y-full');
+        }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('mainNav');
+        const logo = document.getElementById('navLogo');
+        if (window.scrollY > 100) {
+            nav.classList.add('bg-white/95', 'py-4', 'shadow-sm', 'backdrop-blur-md');
+            nav.classList.remove('bg-transparent', 'py-6', 'border-white/10');
+            nav.classList.add('border-black/5');
+            logo.classList.remove('text-white');
+            logo.classList.add('text-on-surface');
+            document.querySelectorAll('#mainNav a').forEach(a => {
+                if(!a.classList.contains('border-white')) {
+                    a.classList.remove('text-white/80');
+                    a.classList.add('text-on-surface-variant');
+                } else {
+                    a.classList.remove('text-white', 'border-white');
+                    a.classList.add('text-tertiary', 'border-tertiary');
+                }
+            });
+        } else {
+            nav.classList.remove('bg-white/95', 'py-4', 'shadow-sm', 'backdrop-blur-md', 'border-black/5');
+            nav.classList.add('bg-transparent', 'py-6', 'border-white/10');
+            logo.classList.add('text-white');
+            logo.classList.remove('text-on-surface');
+            document.querySelectorAll('#mainNav a').forEach(a => {
+                if(!a.classList.contains('border-tertiary')) {
+                    a.classList.add('text-white/80');
+                    a.classList.remove('text-on-surface-variant');
+                } else {
+                    a.classList.add('text-white', 'border-white');
+                    a.classList.remove('text-tertiary', 'border-tertiary');
+                }
+            });
+        }
+    });
+</script>
+</body></html>
