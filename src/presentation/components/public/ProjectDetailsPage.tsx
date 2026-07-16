@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useProject } from '../../../application/hooks/useProject';
 import { useProjects } from '../../../application/hooks/useProjects';
+import { useSettings } from '../../../application/hooks/useSettings';
+import { useTranslation, Trans } from 'react-i18next';
 
 export const ProjectDetailsPage: React.FC = () => {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>(); // This is actually the slug based on the router
   const { project, isLoading, error } = useProject(id);
   const { projects: allProjects } = useProjects('public');
+  const { settings } = useSettings();
   const [activeHeroImage, setActiveHeroImage] = useState<string>('');
 
   useEffect(() => {
@@ -71,9 +75,9 @@ export const ProjectDetailsPage: React.FC = () => {
   const relatedProjects = allProjects.filter(p => p._id !== project._id).slice(0, 3);
   
   // Format description into paragraphs
-  const descriptionParagraphs = (project.fullDescription || project.shortDescription)
-    .split('\n')
-    .filter(p => p.trim() !== '');
+  const fullDescriptionParagraphs = project.fullDescription
+    ? project.fullDescription.split('\n').filter(p => p.trim() !== '')
+    : [];
 
   const allImages = [project.coverImage, ...(project.gallery || [])].filter(Boolean);
 
@@ -98,7 +102,7 @@ export const ProjectDetailsPage: React.FC = () => {
         <div className="relative z-20 text-center px-4 max-w-5xl mx-auto mt-20 flex-1 flex flex-col justify-center animate-in fade-in slide-in-from-bottom-10 duration-1000">
           <div>
             <span className="inline-block px-4 py-1 border border-white/30 backdrop-blur-md text-white font-label-caps text-[11px] uppercase tracking-[0.3em] mb-6 shadow-2xl">
-              {project.isPublished ? 'Available Now' : 'Sold Out'}
+              {project.isPublished ? t('projectDetails.available') : t('projectDetails.soldOut')}
             </span>
             <h1 className="font-display text-display-xl md:text-[80px] lg:text-[100px] text-white leading-[1.1] mb-6 drop-shadow-2xl">
               {project.name}
@@ -151,9 +155,9 @@ export const ProjectDetailsPage: React.FC = () => {
             {/* Sticky Title */}
             <div className="md:col-span-4 reveal-on-scroll">
               <div className="sticky top-32">
-                <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4 drop-shadow-sm">The Vision</p>
+                <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4 drop-shadow-sm">{t('projectDetails.theVision')}</p>
                 <h2 className="font-display text-headline-xl md:text-display-sm leading-tight text-on-surface">
-                  A New Era of <br/><span className="italic text-tertiary font-light">Luxury Living.</span>
+                  {t('projectDetails.title1')} <br/><span className="italic text-tertiary font-light">{t('projectDetails.title2')}</span>
                 </h2>
               </div>
             </div>
@@ -161,8 +165,13 @@ export const ProjectDetailsPage: React.FC = () => {
             {/* Description & Quick Stats */}
             <div className="md:col-span-8 reveal-on-scroll delay-100">
               <div className="prose prose-xl max-w-none relative z-10">
-                {descriptionParagraphs.map((paragraph, idx) => (
-                  <p key={idx} className={idx === 0 ? "text-3xl md:text-4xl text-on-surface font-light leading-snug mb-8" : "text-xl md:text-2xl text-on-surface-variant font-light leading-relaxed mb-6"}>
+                {project.shortDescription && (
+                  <p className="text-3xl md:text-4xl text-on-surface font-light leading-snug mb-8 whitespace-pre-wrap">
+                    {project.shortDescription}
+                  </p>
+                )}
+                {fullDescriptionParagraphs.map((paragraph, idx) => (
+                  <p key={idx} className="text-xl md:text-2xl text-on-surface-variant font-light leading-relaxed mb-6 whitespace-pre-wrap">
                     {paragraph}
                   </p>
                 ))}
@@ -172,21 +181,21 @@ export const ProjectDetailsPage: React.FC = () => {
               <div className="mt-20 pt-16 border-t border-outline-variant/30 grid grid-cols-1 md:grid-cols-12 gap-12">
                 
                 {/* Location & Status (Stacked) */}
-                <div className="md:col-span-4 flex flex-col gap-10 md:border-r border-outline-variant/30 md:pr-10">
+                <div className="md:col-span-4 flex flex-col gap-10 md:border-r md:rtl:border-l md:rtl:border-r-0 border-outline-variant/30 md:pr-10 md:rtl:pr-0 md:rtl:pl-10">
                   <div>
-                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-4">Location</p>
+                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-4">{t('projectDetails.location')}</p>
                     <p className="font-display text-3xl md:text-4xl text-on-surface">{project.location}</p>
                   </div>
                   <div>
-                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-4">Status</p>
-                    <p className="font-display text-3xl md:text-4xl text-on-surface">{project.isPublished ? 'Available Now' : 'Sold Out'}</p>
+                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-4">{t('projectDetails.status')}</p>
+                    <p className="font-display text-3xl md:text-4xl text-on-surface">{project.isPublished ? t('projectDetails.available') : t('projectDetails.soldOut')}</p>
                   </div>
                 </div>
 
                 {/* Amenities (Premium Display) */}
                 {project.amenities && project.amenities.length > 0 && (
                   <div className="md:col-span-8">
-                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-8">Exclusive Amenities</p>
+                    <p className="font-label-caps text-[12px] text-tertiary uppercase tracking-[0.3em] mb-8">{t('projectDetails.amenities')}</p>
                     <div className="flex flex-wrap gap-4">
                       {project.amenities.map((amenity, idx) => (
                         <div 
@@ -213,8 +222,8 @@ export const ProjectDetailsPage: React.FC = () => {
             <div className="max-w-container-max mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16 reveal-on-scroll">
                 <div>
-                  <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4">Discover More</p>
-                  <h2 className="font-display text-headline-xl md:text-display-sm text-on-surface leading-tight">Similar <span className="italic text-tertiary font-light">Residences</span></h2>
+                  <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4">{t('projectDetails.discoverMore')}</p>
+                  <h2 className="font-display text-headline-xl md:text-display-sm text-on-surface leading-tight">{t('projectDetails.similar')} <span className="italic text-tertiary font-light">{t('projectDetails.similarHighlight')}</span></h2>
                 </div>
               </div>
               
@@ -240,8 +249,8 @@ export const ProjectDetailsPage: React.FC = () => {
                         {rel.name}
                       </h3>
                       <div className="flex items-center justify-between text-white group-hover:text-tertiary-fixed transition-colors duration-500">
-                        <span className="font-label-caps text-[10px] uppercase tracking-[0.2em]">View Details</span>
-                        <span className="material-symbols-outlined text-sm transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
+                        <span className="font-label-caps text-[10px] uppercase tracking-[0.2em]">{t('projectsPage.viewDetails')}</span>
+                        <span className="material-symbols-outlined text-sm transform group-hover:translate-x-2 rtl:group-hover:-translate-x-2 rtl:rotate-180 transition-transform duration-500">arrow_forward</span>
                       </div>
                     </div>
                   </Link>
@@ -261,21 +270,21 @@ export const ProjectDetailsPage: React.FC = () => {
               style={{ backgroundImage: `url('${project.coverImage}')` }}
             ></div>
             <div className="hidden sm:block">
-              <p className="font-label-caps text-[9px] text-on-surface-variant tracking-[0.2em] uppercase mb-1">Interested in</p>
+              <p className="font-label-caps text-[9px] text-on-surface-variant tracking-[0.2em] uppercase mb-1">{t('projectDetails.interestedIn')}</p>
               <p className="font-display text-lg leading-none">{project.name}</p>
             </div>
           </div>
           <div className="flex gap-4 w-full md:w-auto">
-            {project.phoneNumber && (
-              <a className="flex-1 md:flex-none border border-outline-variant text-on-surface px-8 py-3.5 font-label-caps text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:border-tertiary hover:text-tertiary transition-all duration-300 rounded-sm" href={`tel:${project.phoneNumber}`}>
+            {settings?.contactPhone && (
+              <a className="flex-1 md:flex-none border border-outline-variant text-on-surface px-8 py-3.5 font-label-caps text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:border-tertiary hover:text-tertiary transition-all duration-300 rounded-sm" href={`tel:${settings.contactPhone}`}>
                 <span className="material-symbols-outlined text-sm">call</span>
-                Call Now
+                {t('projectDetails.callNow')}
               </a>
             )}
-            {project.whatsappNumber && (
-              <a className="flex-1 md:flex-none bg-on-surface text-surface px-8 py-3.5 font-label-caps text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-tertiary transition-all duration-300 shadow-xl rounded-sm" href={`https://wa.me/${project.whatsappNumber}`}>
+            {settings?.whatsappNumber && (
+              <a className="flex-1 md:flex-none bg-on-surface text-surface px-8 py-3.5 font-label-caps text-[11px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-tertiary transition-all duration-300 shadow-xl rounded-sm" href={`https://wa.me/${settings.whatsappNumber}`}>
                 <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
-                WhatsApp
+                {t('projectDetails.whatsapp')}
               </a>
             )}
           </div>

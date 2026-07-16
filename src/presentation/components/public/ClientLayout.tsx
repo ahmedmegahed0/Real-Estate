@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useSettings } from '../../../application/hooks/useSettings';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '../common/LanguageSwitcher';
+import { useAuth } from '../../../application/hooks/use-auth';
 
 export const ClientLayout: React.FC = () => {
   const { settings, isLoading } = useSettings();
+  const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -39,20 +44,21 @@ export const ClientLayout: React.FC = () => {
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
             <img src="/logo.png" alt="Creative Eye" className="h-8 md:h-10 w-auto" />
           </Link>
-          <nav className="hidden md:flex gap-10 items-center">
-            <Link to="/projects" className="text-[10px] font-label-caps uppercase tracking-[0.2em] text-on-surface hover:text-tertiary transition-colors">Projects</Link>
-            <Link to="/login" className="text-[10px] font-label-caps uppercase tracking-[0.2em] text-on-surface-variant hover:text-tertiary transition-colors">Admin</Link>
+          <nav className="hidden md:flex gap-6 lg:gap-10 items-center">
+            <Link to="/projects" className="text-[10px] rtl:text-[14px] rtl:font-bold font-label-caps uppercase tracking-[0.2em] rtl:tracking-normal text-on-surface hover:text-tertiary transition-colors">{t('nav.projects')}</Link>
+            <Link to={isAuthenticated ? "/dashboard" : "/login"} className="text-[10px] rtl:text-[14px] rtl:font-bold font-label-caps uppercase tracking-[0.2em] rtl:tracking-normal text-on-surface-variant hover:text-tertiary transition-colors">{t('nav.admin')}</Link>
+            <LanguageSwitcher />
           </nav>
-          <a
-            href="#contact"
-            className={`font-label-caps text-[10px] uppercase tracking-[0.2em] transition-all duration-500 max-md:hidden ${
+          <Link
+            to="/contact"
+            className={`font-label-caps text-[10px] rtl:text-[14px] rtl:font-bold uppercase tracking-[0.2em] rtl:tracking-normal transition-all duration-500 max-md:hidden ${
               scrolled 
                 ? 'bg-on-surface text-surface px-8 py-3 rounded-full hover:bg-tertiary hover:scale-105 shadow-xl' 
                 : 'border border-outline-variant px-8 py-3 hover:border-tertiary hover:text-tertiary'
             }`}
           >
-            Inquire Now
-          </a>
+            {t('nav.inquireNow')}
+          </Link>
         </div>
       </header>
 
@@ -73,43 +79,43 @@ export const ClientLayout: React.FC = () => {
                 <img src="/logo.png" alt={siteName} className="h-12 md:h-16 mb-8 object-contain" />
               </Link>
               <p className="font-body-md text-white/60 leading-relaxed max-w-sm">
-                {settings?.siteDescription || 'Creative Eye is the premier real estate marketing collective for developers who demand excellence and results.'}
+                {settings?.siteDescription || t('footer.description')}
               </p>
             </div>
             
             <div className="md:col-span-2 md:col-start-7">
-              <h5 className="font-label-caps text-[11px] uppercase mb-8 tracking-[0.3em] text-tertiary">Portfolio</h5>
+              <h5 className="font-label-caps text-[11px] rtl:text-[14px] rtl:font-bold rtl:tracking-normal uppercase mb-8 tracking-[0.3em] text-tertiary">{t('footer.portfolio')}</h5>
               <ul className="space-y-4">
-                <li><Link to="/projects" className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block">All Projects</Link></li>
-                <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href="#">Available Now</a></li>
-                <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href="#">Sold Out</a></li>
+                <li><Link to="/projects" className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block">{t('footer.allProjects')}</Link></li>
+                <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href="#">{t('footer.availableNow')}</a></li>
+                <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href="#">{t('footer.soldOut')}</a></li>
               </ul>
             </div>
             
             <div className="md:col-span-2">
-              <h5 className="font-label-caps text-[11px] uppercase mb-8 tracking-[0.3em] text-tertiary">Company</h5>
+              <h5 className="font-label-caps text-[11px] rtl:text-[14px] rtl:font-bold rtl:tracking-normal uppercase mb-8 tracking-[0.3em] text-tertiary">{t('footer.company')}</h5>
               <ul className="space-y-4">
-                <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href="#">About Us</a></li>
-                <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href="#">The Process</a></li>
-                <li><Link to="/login" className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block">Admin Portal</Link></li>
+                <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href="#">{t('footer.aboutUs')}</a></li>
+                <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href="#">{t('footer.theProcess')}</a></li>
+                <li><Link to={isAuthenticated ? "/dashboard" : "/login"} className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block">{t('footer.adminPortal')}</Link></li>
               </ul>
             </div>
             
             <div className="md:col-span-2">
-              <h5 className="font-label-caps text-[11px] uppercase mb-8 tracking-[0.3em] text-tertiary">Connect</h5>
+              <h5 className="font-label-caps text-[11px] rtl:text-[14px] rtl:font-bold rtl:tracking-normal uppercase mb-8 tracking-[0.3em] text-tertiary">{t('footer.connect')}</h5>
               <ul className="space-y-4">
-                {settings?.contactEmail && <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href={`mailto:${settings.contactEmail}`}>Email Us</a></li>}
-                {settings?.whatsappNumber && <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href={`https://wa.me/${settings.whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a></li>}
-                {settings?.contactPhone && <li><a className="text-white/60 hover:text-white hover:translate-x-2 transition-all font-body-md inline-block" href={`tel:${settings.contactPhone}`}>Call Us</a></li>}
+                {settings?.contactEmail && <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href={`mailto:${settings.contactEmail}`}>{t('footer.emailUs')}</a></li>}
+                {settings?.whatsappNumber && <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href={`https://wa.me/${settings.whatsappNumber}`} target="_blank" rel="noreferrer">{t('footer.whatsapp')}</a></li>}
+                {settings?.contactPhone && <li><a className="text-white/60 hover:text-white hover:-translate-x-2 rtl:hover:translate-x-2 transition-all font-body-md inline-block" href={`tel:${settings.contactPhone}`}>{t('footer.callUs')}</a></li>}
               </ul>
             </div>
           </div>
           
           <div className="max-w-[1280px] mx-auto px-margin-desktop pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 max-md:px-margin-mobile relative z-10">
-            <p className="font-body-md text-white/40 text-[12px]">© {currentYear} {siteName}. All rights reserved.</p>
+            <p className="font-body-md text-white/40 text-[12px] rtl:text-[14px]">{t('footer.copyright', { year: currentYear, siteName })}</p>
             <div className="flex gap-10">
-              <a className="text-[10px] uppercase tracking-[0.2em] font-label-caps text-white/40 hover:text-white transition-colors" href="#">Privacy Policy</a>
-              <a className="text-[10px] uppercase tracking-[0.2em] font-label-caps text-white/40 hover:text-white transition-colors" href="#">Terms of Service</a>
+              <a className="text-[10px] rtl:text-[13px] rtl:font-bold rtl:tracking-normal uppercase tracking-[0.2em] font-label-caps text-white/40 hover:text-white transition-colors" href="#">{t('footer.privacyPolicy')}</a>
+              <a className="text-[10px] rtl:text-[13px] rtl:font-bold rtl:tracking-normal uppercase tracking-[0.2em] font-label-caps text-white/40 hover:text-white transition-colors" href="#">{t('footer.termsOfService')}</a>
             </div>
           </div>
         </footer>

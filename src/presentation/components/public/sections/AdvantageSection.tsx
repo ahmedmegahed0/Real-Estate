@@ -1,13 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const AdvantageSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="process" className="py-section-gap px-margin-desktop bg-surface overflow-hidden max-md:px-margin-mobile">
       <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
         <div className="lg:col-span-5 reveal-on-scroll">
-          <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-widest">About Us</p>
+          <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-widest">{t('advantage.aboutUs')}</p>
           <h2 className="font-display text-display-lg leading-tight mb-8 max-md:text-display-md">
-            A Legacy of Excellence in <span className="italic">Luxury Real Estate.</span>
+            {t('advantage.title')}<span className="italic">{t('advantage.titleHighlight')}</span>
           </h2>
           <div className="space-y-10">
             <div className="flex gap-6 group">
@@ -15,9 +18,9 @@ export const AdvantageSection: React.FC = () => {
                 <span className="material-symbols-outlined text-primary group-hover:text-on-tertiary-fixed">visibility</span>
               </div>
               <div>
-                <h4 className="font-display text-headline-sm mb-2">Cinematic Narrative</h4>
+                <h4 className="font-display text-headline-sm mb-2">{t('advantage.feature1Title')}</h4>
                 <p className="text-on-surface-variant font-body-md leading-relaxed">
-                  We don't just shoot interiors; we capture the emotional essence of a home through Hollywood-grade production values.
+                  {t('advantage.feature1Desc')}
                 </p>
               </div>
             </div>
@@ -26,9 +29,9 @@ export const AdvantageSection: React.FC = () => {
                 <span className="material-symbols-outlined text-primary group-hover:text-on-tertiary-fixed">analytics</span>
               </div>
               <div>
-                <h4 className="font-display text-headline-sm mb-2">Precision Targeting</h4>
+                <h4 className="font-display text-headline-sm mb-2">{t('advantage.feature2Title')}</h4>
                 <p className="text-on-surface-variant font-body-md leading-relaxed">
-                  Proprietary data algorithms ensure your project is seen by the top 1% of qualified global investors.
+                  {t('advantage.feature2Desc')}
                 </p>
               </div>
             </div>

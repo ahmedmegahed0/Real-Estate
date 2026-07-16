@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useProjects } from '../../../../application/hooks/useProjects';
 import { ProjectUnlockModal } from './ProjectUnlockModal';
 import type { Project } from '../../../../domain/types/project.types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../../application/hooks/use-auth';
 
 const PremiumProjectCard: React.FC<{ project: Project; onUnlock: () => void; index: number }> = ({ project, onUnlock, index }) => {
+  const { t } = useTranslation();
   return (
     <div 
       className={`group relative w-full aspect-[3/4] overflow-hidden rounded-2xl border border-white/5 shadow-2xl hover:shadow-[0_0_40px_rgba(200,169,106,0.15)] cursor-pointer reveal-on-scroll stagger-${Math.min(index + 1, 3)} transition-shadow duration-700`}
@@ -25,11 +28,11 @@ const PremiumProjectCard: React.FC<{ project: Project; onUnlock: () => void; ind
       <div className="absolute top-6 left-6 flex flex-col gap-3 items-start z-10">
         {project.isFeatured && (
           <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white font-label-caps text-[10px] uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-2xl">
-            Featured
+            {t('featuredProjects.badges.featured')}
           </span>
         )}
         <span className={`${project.isPublished ? 'bg-tertiary text-on-tertiary' : 'bg-error text-on-error'} font-label-caps text-[10px] uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-2xl`}>
-          {project.isPublished ? 'Available' : 'Sold Out'}
+          {project.isPublished ? t('featuredProjects.badges.available') : t('featuredProjects.badges.soldOut')}
         </span>
       </div>
 
@@ -64,9 +67,9 @@ const PremiumProjectCard: React.FC<{ project: Project; onUnlock: () => void; ind
         {/* Call to Action */}
         <div className="flex items-center justify-between text-white group-hover:text-tertiary-fixed transition-colors duration-500">
           <span className="font-label-caps text-[11px] uppercase tracking-[0.2em]">
-            Unlock Details
+            {t('featuredProjects.unlock')}
           </span>
-          <span className="material-symbols-outlined transform group-hover:translate-x-2 transition-transform duration-500">
+          <span className="material-symbols-outlined transform group-hover:translate-x-2 rtl:group-hover:-translate-x-2 rtl:rotate-180 transition-transform duration-500">
             arrow_forward
           </span>
         </div>
@@ -76,9 +79,21 @@ const PremiumProjectCard: React.FC<{ project: Project; onUnlock: () => void; ind
 };
 
 export const FeaturedProjects: React.FC = () => {
+  const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const { projects, isLoading, error } = useProjects('public');
   const [selectedProject, setSelectedProject] = useState<{ id: string; name: string; projectSlug: string; coverImage: string } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const handleProjectClick = (project: Project) => {
+    const hasUnlocked = localStorage.getItem('hasUnlockedProjects') === 'true';
+    if (isAuthenticated || hasUnlocked) {
+      navigate(`/projects/${project.slug}`);
+    } else {
+      setSelectedProject({ id: project._id, name: project.name, projectSlug: project.slug, coverImage: project.coverImage });
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -132,9 +147,9 @@ export const FeaturedProjects: React.FC = () => {
             {/* Decorative line */}
             <div className="absolute -left-margin-desktop top-4 w-12 h-px bg-tertiary max-md:hidden" />
             
-            <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-[0.3em]">The Collection</p>
+            <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-[0.3em]">{t('featuredProjects.collection')}</p>
             <h2 className="font-display text-display-lg max-md:text-display-md leading-tight text-on-surface">
-              Curated <span className="italic text-tertiary font-light">Residences</span>
+              {t('featuredProjects.title')}<span className="italic text-tertiary font-light">{t('featuredProjects.titleHighlight')}</span>
             </h2>
           </div>
           {hasMore && (
@@ -143,9 +158,9 @@ export const FeaturedProjects: React.FC = () => {
               className="group flex items-center gap-4 border-b border-on-surface pb-2 hover:border-tertiary transition-colors"
             >
               <span className="font-label-caps text-[12px] uppercase tracking-[0.2em] text-on-surface group-hover:text-tertiary transition-colors">
-                Explore Full Directory
+                {t('featuredProjects.exploreAll')}
               </span>
-              <span className="material-symbols-outlined text-sm text-on-surface group-hover:text-tertiary group-hover:translate-x-1 transition-all">
+              <span className="material-symbols-outlined text-sm text-on-surface group-hover:text-tertiary group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180 transition-all">
                 arrow_forward
               </span>
             </Link>
@@ -159,7 +174,7 @@ export const FeaturedProjects: React.FC = () => {
               key={project._id} 
               project={project}
               index={index}
-              onUnlock={() => setSelectedProject({ id: project._id, name: project.name, projectSlug: project.slug, coverImage: project.coverImage })} 
+              onUnlock={() => handleProjectClick(project)} 
             />
           ))}
         </div>
@@ -171,8 +186,8 @@ export const FeaturedProjects: React.FC = () => {
               to="/projects" 
               className="inline-flex items-center gap-3 px-8 py-4 bg-on-surface text-surface font-label-caps text-[12px] uppercase tracking-[0.2em] hover:bg-tertiary transition-colors"
             >
-              View All Projects
-              <span className="material-symbols-outlined text-sm">east</span>
+              {t('featuredProjects.viewAll')}
+              <span className="material-symbols-outlined text-sm rtl:rotate-180">east</span>
             </Link>
           </div>
         )}

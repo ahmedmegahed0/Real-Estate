@@ -101,6 +101,19 @@ body {
   font-family: var(--font-body);
 }
 
+html[dir="rtl"] {
+  --font-display: "Tajawal", sans-serif;
+  --font-body: "Cairo", sans-serif;
+  --font-headline-lg-mobile: "Tajawal";
+  --font-label-caps: "Cairo";
+  --font-body-lg: "Cairo";
+  --font-headline-xl: "Tajawal";
+  --font-headline-lg: "Tajawal";
+  --font-display-xl: "Tajawal";
+  --font-display-lg: "Tajawal";
+  --font-body-md: "Cairo";
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
 }

@@ -1,0 +1,255 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "admin": "Admin",
+    "inquireNow": "Inquire Now"
+  },
+  "footer": {
+    "portfolio": "Portfolio",
+    "allProjects": "All Projects",
+    "availableNow": "Available Now",
+    "soldOut": "Sold Out",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "theProcess": "The Process",
+    "adminPortal": "Admin Portal",
+    "connect": "Connect",
+    "emailUs": "Email Us",
+    "whatsapp": "WhatsApp",
+    "callUs": "Call Us",
+    "copyright": "© {{year}} {{siteName}}. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "description": "Creative Eye is the premier real estate marketing collective for developers who demand excellence and results."
+  },
+  "hero": {
+    "welcome": "Welcome to Excellence",
+    "title": "Elevating Real Estate into ",
+    "titleHighlight": "Timeless Art.",
+    "description": "<1>Creative Eye</1> is the visionary pioneer of luxury real estate marketing. We don't just showcase properties; we craft breathtaking visual legacies and cinematic experiences that captivate elite buyers and redefine industry standards.",
+    "explore": "Explore Projects"
+  },
+  "advantage": {
+    "aboutUs": "About Us",
+    "title": "A Legacy of Excellence in ",
+    "titleHighlight": "Luxury Real Estate.",
+    "feature1Title": "Cinematic Narrative",
+    "feature1Desc": "We don't just shoot interiors; we capture the emotional essence of a home through Hollywood-grade production values.",
+    "feature2Title": "Precision Targeting",
+    "feature2Desc": "Proprietary data algorithms ensure your project is seen by the top 1% of qualified global investors."
+  },
+  "process": {
+    "framework": "Execution Framework",
+    "title": "The Path to ",
+    "titleHighlight": "Sold Out.",
+    "step1Title": "Visual Auditing",
+    "step1Desc": "We break down the architectural language of your project to identify the exact narrative hooks that will captivate your buyer persona.",
+    "step2Title": "Multi-Sensory Asset Creation",
+    "step2Desc": "From 8K drone cinematography to haptic-enabled digital brochures, we build a world for your project to live in.",
+    "step3Title": "Velocity Launch",
+    "step3Desc": "Coordinated multi-channel blitz across private investor networks and global social platforms to generate maximum initial friction.",
+    "quote": "\"Our methodology isn't just about marketing; it's about engineering desire.\"",
+    "quoteAuthor": "Ahmed Khaled, CEO"
+  },
+  "testimonials": {
+    "subtitle": "Industry Voices",
+    "title": "Words from Our ",
+    "titleHighlight": "Partners",
+    "quote": "\"Creative Eye transformed the way we present our projects. The quality of leads and the campaign results exceeded our expectations by a factor of three.\"",
+    "authorName": "Eng. Mohamed Adel",
+    "authorRole": "CEO, BuildWell Developments"
+  },
+  "contact": {
+    "title": "Ready to Lead the ",
+    "titleHighlight": "Market?",
+    "description": "We selectively partner with developers who share our commitment to architectural excellence. Let's start the conversation.",
+    "success": "Request received. Our team will contact you shortly.",
+    "infoLabel": "Your Information",
+    "fullName": "Full Name",
+    "email": "Corporate Email",
+    "phone": "Phone Number",
+    "interestLabel": "Project Interest",
+    "interestOpt1": "Residential Development Launch",
+    "interestOpt2": "Commercial Portfolio Marketing",
+    "interestOpt3": "Global Investor Acquisition",
+    "interestOpt4": "Brand Identity Refinement",
+    "submitBtn": "Request Confidential Brief",
+    "submitting": "Submitting..."
+  },
+  "featuredProjects": {
+    "collection": "The Collection",
+    "title": "Curated ",
+    "titleHighlight": "Residences",
+    "exploreAll": "Explore Full Directory",
+    "viewAll": "View All Projects",
+    "badges": {
+      "featured": "Featured",
+      "available": "Available",
+      "soldOut": "Sold Out"
+    },
+    "unlock": "Unlock Details"
+  },
+  "unlockModal": {
+    "exclusiveAccess": "Exclusive Access",
+    "register": "Register to unlock full project gallery, floor plans, and pricing details.",
+    "unlockPortfolio": "Unlock Portfolio",
+    "provideDetails": "Provide your details to securely access the presentation for ",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "email": "Email Address",
+    "unlocking": "Unlocking...",
+    "unlockProject": "Unlock Project",
+    "privacyNotice": "By unlocking, you agree to our privacy policy."
+  },
+  "projectsPage": {
+    "portfolio": "Our Portfolio",
+    "title": "Exclusive ",
+    "titleHighlight": "Residences",
+    "available": "Available",
+    "soldOut": "Sold Out",
+    "viewDetails": "View Details"
+  },
+  "projectDetails": {
+    "available": "Available Now",
+    "soldOut": "Sold Out",
+    "theVision": "The Vision",
+    "title1": "A New Era of",
+    "title2": "Luxury Living.",
+    "location": "Location",
+    "status": "Status",
+    "amenities": "Exclusive Amenities",
+    "discoverMore": "Discover More",
+    "similar": "Similar ",
+    "similarHighlight": "Residences",
+    "interestedIn": "Interested in",
+    "callNow": "Call Now",
+    "whatsapp": "WhatsApp"
+  },
+  "login": {
+    "back": "Back to Website",
+    "authorizedOnly": "Authorized Personnel Only",
+    "missingCreds": "Please provide both email and password.",
+    "invalidCreds": "Invalid credentials. Please try again.",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "forgotPassword": "Forgot Password?",
+    "authenticating": "Authenticating...",
+    "signIn": "Sign In"
+  },
+  "admin": {
+    "portal": "Admin Portal",
+    "overview": "Overview",
+    "projects": "Projects",
+    "leads": "Leads",
+    "settings": "Settings",
+    "viewSite": "View Site",
+    "signOut": "Sign Out"
+  },
+  "dashboard": {
+    "overview": "Dashboard Overview",
+    "welcome": "Welcome back. Here's what's happening with your projects and leads today.",
+    "realTime": "Real-time statistics",
+    "refresh": "Refresh",
+    "errorLoading": "Error Loading Dashboard"
+  },
+  "projectsDashboard": {
+    "title": "Projects Portfolio",
+    "subtitle": "Manage your luxury real estate listings",
+    "addNew": "Add New Project",
+    "noProjects": "No projects found. Start building your portfolio."
+  },
+  "leadsDashboard": {
+    "title": "Leads Management",
+    "refresh": "Refresh",
+    "exportExcel": "Export Excel",
+    "loading": "Loading leads...",
+    "noLeads": "No leads found for the selected period.",
+    "columns": {
+      "date": "Date",
+      "contact": "Contact",
+      "project": "Project",
+      "status": "Status",
+      "notes": "Notes",
+      "actions": "Actions"
+    },
+    "filters": {
+      "all": "All",
+      "today": "Today",
+      "week": "Week",
+      "month": "Month"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "addNote": "+ Add note"
+    },
+    "deleteTitle": "Delete Lead",
+    "deleteMessage": "Are you sure you want to permanently delete this lead? This action cannot be undone.",
+    "deleteConfirm": "Delete"
+  },
+  "settingsPage": {
+    "title": "Website Settings",
+    "subtitle": "Configure your platform's global settings and contact information.",
+    "saveSuccess": "Settings saved successfully!",
+    "siteName": "Site Name *",
+    "siteDescription": "Site Description *",
+    "contactEmail": "Contact Email *",
+    "contactPhone": "Contact Phone *",
+    "whatsappNumber": "WhatsApp Number *",
+    "websiteLogo": "Website Logo",
+    "maintenanceMode": "Maintenance Mode",
+    "maintenanceDesc": "Temporarily disable public access to the website.",
+    "saving": "Saving Changes...",
+    "saveSettings": "Save Settings"
+  },
+  "projectForm": {
+    "editTitle": "Edit Residence",
+    "addTitle": "Add New Residence",
+    "subtitle": "Curate your exclusive portfolio",
+    "name": "Project Name *",
+    "location": "Location *",
+    "shortDescription": "Short Description *",
+    "fullDescription": "Full Description *",
+    "whatsappNumber": "WhatsApp Number *",
+    "phoneNumber": "Phone Number *",
+    "googleMapsUrl": "Google Maps URL",
+    "coverImage": "Cover Image",
+    "gallery": "Project Gallery",
+    "amenities": "Amenities",
+    "amenityPlaceholder": "E.g., Swimming Pool, Gym...",
+    "add": "Add",
+    "published": "Published (Visible to public)",
+    "featured": "Featured on Home Page",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "save": "Save Residence",
+    "deleteTitle": "Delete Residence",
+    "deleteMessage": "Are you absolutely sure you want to delete this residence? This action is permanent and cannot be undone.",
+    "confirmDelete": "Yes, Delete",
+    "keepIt": "Keep It"
+  },
+  "otp": {
+    "title": "Creative Eye",
+    "subtitle": "Enter Verification Code",
+    "invalidLength": "Please enter all 6 digits.",
+    "invalidCode": "Invalid verification code.",
+    "resendFailed": "Failed to resend OTP. Please try again.",
+    "verifying": "Verifying...",
+    "verifyAccess": "Verify Access",
+    "didNotReceive": "Didn't receive the code?",
+    "resendIn": "Resend in {{seconds}}s",
+    "resendCode": "Resend Code"
+  },
+  "contactPage": {
+    "getInTouch": "Get in Touch",
+    "title": "We Are Here",
+    "titleHighlight": "To Help",
+    "description": "Our team of real estate experts is always ready to answer your inquiries and help you find the perfect property that meets your needs and vision.",
+    "message": "Your Message (Optional)",
+    "send": "Send Inquiry",
+    "sending": "Sending...",
+    "successTitle": "Inquiry Sent!",
+    "successMessage": "Thank you for getting in touch. One of our representatives will contact you shortly."
+  }
+}

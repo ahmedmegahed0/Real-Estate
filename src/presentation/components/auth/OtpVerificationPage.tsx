@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../../application/hooks/use-auth';
+import { useTranslation } from 'react-i18next';
 
 export function OtpVerificationPage() {
+  const { t } = useTranslation();
   const { submitOtp, triggerResendOtp } = useAuth();
   const [code, setCode] = useState(['', '', '', '', '', '']);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +44,7 @@ export function OtpVerificationPage() {
     e.preventDefault();
     const finalCode = code.join('');
     if (finalCode.length < 6) {
-      setError('Please enter all 6 digits.');
+      setError(t('otp.invalidLength'));
       return;
     }
 
@@ -51,7 +53,7 @@ export function OtpVerificationPage() {
     
     const success = await submitOtp(finalCode);
     if (!success) {
-      setError('Invalid verification code.');
+      setError(t('otp.invalidCode'));
       setIsLoading(false);
     }
   };
@@ -63,7 +65,7 @@ export function OtpVerificationPage() {
     if (success) {
       setCountdown(60);
     } else {
-      setError('Failed to resend OTP. Please try again.');
+      setError(t('otp.resendFailed'));
     }
     setIsLoading(false);
   };
@@ -75,10 +77,10 @@ export function OtpVerificationPage() {
           <img src="/logo.png" alt="Creative Eye Logo" className="w-full h-full object-contain" />
         </div>
         <h2 className="text-3xl font-['Playfair_Display'] text-[#C8A96A] mb-3 tracking-wide">
-          Creative Eye
+          {t('otp.title')}
         </h2>
         <p className="font-['Inter'] text-xs font-medium text-[#6B6B6B] tracking-[0.2em] uppercase">
-          Enter Verification Code
+          {t('otp.subtitle')}
         </p>
       </div>
 
@@ -89,7 +91,7 @@ export function OtpVerificationPage() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="flex justify-between gap-2">
+        <div className="flex justify-between gap-2" dir="ltr">
           {code.map((digit, index) => (
             <input
               key={index}
@@ -110,23 +112,23 @@ export function OtpVerificationPage() {
           <button
             type="submit"
             disabled={isLoading || code.some((d) => d === '')}
-            className="relative w-full overflow-hidden bg-gradient-to-r from-[#C8A96A] to-[#D4AF37] text-[#111111] font-['Inter'] font-bold text-xs tracking-[0.2em] uppercase py-4 rounded-xl hover:shadow-[0_0_20px_rgba(200,169,106,0.4)] hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
+            className="relative w-full overflow-hidden bg-gradient-to-r from-[#C8A96A] to-[#D4AF37] text-[#111111] font-['Inter'] font-bold text-xs tracking-[0.2em] rtl:tracking-normal uppercase py-4 rounded-xl hover:shadow-[0_0_20px_rgba(200,169,106,0.4)] hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
           >
-            <span className="relative z-10">{isLoading ? 'Verifying...' : 'Verify Access'}</span>
+            <span className="relative z-10">{isLoading ? t('otp.verifying') : t('otp.verifyAccess')}</span>
           </button>
         </div>
 
         <div className="mt-8 text-center border-t border-white/10 pt-6">
           <p className="text-[11px] tracking-wider text-white/50 font-['Inter'] mb-3 uppercase">
-            Didn't receive the code?
+            {t('otp.didNotReceive')}
           </p>
           <button
             type="button"
             onClick={handleResend}
             disabled={countdown > 0}
-            className="text-[11px] font-bold text-[#C8A96A] hover:text-white transition-colors bg-transparent border-none uppercase tracking-[0.15em] disabled:opacity-50 disabled:hover:text-[#C8A96A]"
+            className="text-[11px] font-bold text-[#C8A96A] hover:text-white transition-colors bg-transparent border-none uppercase tracking-[0.15em] rtl:tracking-normal disabled:opacity-50 disabled:hover:text-[#C8A96A]"
           >
-            {countdown > 0 ? `Resend in ${countdown}s` : 'Resend Code'}
+            {countdown > 0 ? t('otp.resendIn', { seconds: countdown }) : t('otp.resendCode')}
           </button>
         </div>
       </form>

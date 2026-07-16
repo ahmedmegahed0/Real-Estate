@@ -12,8 +12,26 @@ export function useLeads(initialFilter: string = 'all') {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await LeadService.getAdminLeads(filter);
-      setLeads(data);
+      // Fetch all leads and filter on frontend since backend filter is broken
+      const data = await LeadService.getAdminLeads('all');
+      
+      let filteredData = data;
+      const now = new Date();
+      
+      if (filter === 'today') {
+        filteredData = data.filter(lead => {
+          const leadDate = new Date(lead.createdAt);
+          return leadDate.toDateString() === now.toDateString();
+        });
+      } else if (filter === 'week') {
+        const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        filteredData = data.filter(lead => new Date(lead.createdAt) >= oneWeekAgo);
+      } else if (filter === 'month') {
+        const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+        filteredData = data.filter(lead => new Date(lead.createdAt) >= oneMonthAgo);
+      }
+      
+      setLeads(filteredData);
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Failed to fetch leads');
     } finally {

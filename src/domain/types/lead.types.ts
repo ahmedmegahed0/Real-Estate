@@ -17,6 +17,7 @@ export interface SubmitLeadInput {
   phoneNumber: string;
   email?: string;
   projectId?: string;
+  notes?: string;
 }
 
 export interface UpdateLeadInput {

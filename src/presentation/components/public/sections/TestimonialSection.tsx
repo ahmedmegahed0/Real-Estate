@@ -1,12 +1,15 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const TestimonialSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="testimonials" className="py-section-gap px-margin-desktop bg-surface max-md:px-margin-mobile">
       <div className="max-w-container-max mx-auto text-center mb-20 reveal-on-scroll">
-        <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-widest">Industry Voices</p>
+        <p className="font-label-caps text-label-caps text-tertiary uppercase mb-6 tracking-widest">{t('testimonials.subtitle')}</p>
         <h2 className="font-display text-display-lg max-md:text-display-md">
-          Words from Our <span className="italic">Partners</span>
+          {t('testimonials.title')}<span className="italic">{t('testimonials.titleHighlight')}</span>
         </h2>
       </div>
       <div className="max-w-4xl mx-auto reveal-on-scroll stagger-2">
@@ -14,7 +17,7 @@ export const TestimonialSection: React.FC = () => {
           <span className="material-symbols-outlined text-[100px] text-tertiary-fixed absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 opacity-20">format_quote</span>
           <div className="relative z-10">
             <p className="font-display text-headline-xl italic text-on-surface mb-12 leading-tight max-md:text-headline-md">
-              "Creative Eye transformed the way we present our projects. The quality of leads and the campaign results exceeded our expectations by a factor of three."
+              {t('testimonials.quote')}
             </p>
             <div className="flex flex-col items-center gap-4">
               <div className="w-20 h-20 rounded-full overflow-hidden grayscale">
@@ -25,8 +28,8 @@ export const TestimonialSection: React.FC = () => {
                 />
               </div>
               <div>
-                <h5 className="font-display text-headline-sm">Eng. Mohamed Adel</h5>
-                <p className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">CEO, BuildWell Developments</p>
+                <h5 className="font-display text-headline-sm">{t('testimonials.authorName')}</h5>
+                <p className="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">{t('testimonials.authorRole')}</p>
               </div>
             </div>
           </div>

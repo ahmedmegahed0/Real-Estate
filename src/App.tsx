@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Routes, Route, useNavigate, Outlet, Navigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { AuthProvider } from './application/hooks/use-auth';
 import { ClientLayout } from './presentation/components/public/ClientLayout';
 import { HomePage } from './presentation/components/public/HomePage';
 import { ProjectDetailsPage } from './presentation/components/public/ProjectDetailsPage';
 import { ProjectsPage } from './presentation/components/public/ProjectsPage';
+import { ContactPage } from './presentation/components/public/ContactPage';
 import { LoginPage } from './presentation/components/auth/LoginPage';
 import { OtpVerificationPage } from './presentation/components/auth/OtpVerificationPage';
 import { ForgetPasswordPage } from './presentation/components/auth/ForgetPasswordPage';
@@ -16,6 +18,7 @@ import { SettingsPage } from './presentation/components/settings/SettingsPage';
 import { DashboardMainPage } from './presentation/components/dashboard/DashboardMainPage';
 
 function DashboardLayout() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -69,7 +72,7 @@ function DashboardLayout() {
             <img src="/logo.png" alt="Creative Eye Logo" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
           </div>
           <h2 className="text-xl font-['Playfair_Display'] text-white tracking-wide group-hover:text-[#C8A96A] transition-colors">Creative Eye</h2>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-[#C8A96A] mt-1">Admin Portal</span>
+          <span className="text-xs rtl:text-sm rtl:font-bold uppercase tracking-[0.3em] rtl:tracking-normal text-[#C8A96A] mt-1">{t('admin.portal')}</span>
         </div>
 
         <nav className="flex flex-col space-y-3 mt-8 md:mt-0">
@@ -77,42 +80,50 @@ function DashboardLayout() {
             onClick={() => { navigate('/dashboard'); setIsMobileMenuOpen(false); }} 
             className="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5 active:scale-95"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-            <span className="text-xs uppercase tracking-widest font-medium">Overview</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span className="text-sm rtl:text-base rtl:font-bold rtl:tracking-normal uppercase tracking-widest font-medium">{t('admin.overview')}</span>
           </button>
 
           <button 
             onClick={() => { navigate('/dashboard/projects'); setIsMobileMenuOpen(false); }} 
             className="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5 active:scale-95"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M2 15h10"></path><path d="M9 18l3-3-3-3"></path></svg>
-            <span className="text-xs uppercase tracking-widest font-medium">Projects</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path><polyline points="14 2 14 8 20 8"></polyline><path d="M2 15h10"></path><path d="M9 18l3-3-3-3"></path></svg>
+            <span className="text-sm rtl:text-base rtl:font-bold rtl:tracking-normal uppercase tracking-widest font-medium">{t('admin.projects')}</span>
           </button>
           
           <button 
             onClick={() => { navigate('/dashboard/leads'); setIsMobileMenuOpen(false); }} 
             className="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5 active:scale-95"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            <span className="text-xs uppercase tracking-widest font-medium">Leads</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span className="text-sm rtl:text-base rtl:font-bold rtl:tracking-normal uppercase tracking-widest font-medium">{t('admin.leads')}</span>
           </button>
 
           <button 
             onClick={() => { navigate('/dashboard/settings'); setIsMobileMenuOpen(false); }} 
             className="flex items-center space-x-4 px-4 py-3 rounded-xl transition-all duration-300 text-white/60 hover:text-white hover:bg-white/5 active:scale-95"
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-            <span className="text-xs uppercase tracking-widest font-medium">Settings</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span className="text-sm rtl:text-base rtl:font-bold rtl:tracking-normal uppercase tracking-widest font-medium">{t('admin.settings')}</span>
           </button>
         </nav>
 
-        <div className="mt-auto">
+        <div className="mt-auto space-y-3">
+          <button 
+            onClick={() => { window.open('/', '_blank'); setIsMobileMenuOpen(false); }} 
+            className="w-full flex items-center justify-center space-x-3 px-4 py-3 rounded-xl border border-white/10 text-white/60 hover:text-white hover:border-white/30 transition-all duration-300"
+          >
+            <span className="material-symbols-outlined text-[18px]">public</span>
+            <span className="text-xs rtl:text-sm rtl:font-bold rtl:tracking-normal uppercase tracking-widest">{t('admin.viewSite')}</span>
+          </button>
+
           <button 
             onClick={() => navigate('/')} 
             className="w-full flex items-center justify-center space-x-3 px-4 py-3 rounded-xl border border-white/10 text-white/40 hover:text-white hover:border-white/30 transition-all duration-300"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-            <span className="text-[10px] uppercase tracking-widest">Sign Out</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span className="text-xs rtl:text-sm rtl:font-bold rtl:tracking-normal uppercase tracking-widest">{t('admin.signOut')}</span>
           </button>
         </div>
       </div>
@@ -153,6 +164,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Route>
 
         {/* Admin Auth Routes */}

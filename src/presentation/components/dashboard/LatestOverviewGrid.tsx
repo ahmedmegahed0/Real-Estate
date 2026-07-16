@@ -43,10 +43,10 @@ export function LatestOverviewGrid({ stats, isLoading }: LatestOverviewProps) {
                 </div>
               </div>
             ))
-          ) : !stats?.latestProjects || stats.latestProjects.length === 0 ? (
+          ) : !stats?.recentProjects || stats.recentProjects.length === 0 ? (
             <div className="text-center py-10 text-white/40 font-['Inter'] text-sm">No recent projects found.</div>
           ) : (
-            stats.latestProjects.map(project => (
+            stats.recentProjects.map(project => (
               <div key={project._id} className="flex items-center space-x-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 transition-all duration-300 group">
                 <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-white/10 relative">
                   {project.coverImage ? (
@@ -95,10 +95,10 @@ export function LatestOverviewGrid({ stats, isLoading }: LatestOverviewProps) {
                 </div>
               </div>
             ))
-          ) : !stats?.latestLeads || stats.latestLeads.length === 0 ? (
+          ) : !stats?.recentLeads || stats.recentLeads.length === 0 ? (
             <div className="text-center py-10 text-white/40 font-['Inter'] text-sm">No recent leads found.</div>
           ) : (
-            stats.latestLeads.map(lead => (
+            stats.recentLeads.map(lead => (
               <div key={lead._id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-white/10 transition-all duration-300 gap-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center shrink-0 border border-white/10">

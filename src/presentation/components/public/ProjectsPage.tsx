@@ -1,13 +1,32 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useProjects } from '../../../application/hooks/useProjects';
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../application/hooks/use-auth';
+import { ProjectUnlockModal } from './sections/ProjectUnlockModal';
+import type { Project } from '../../../domain/types/project.types';
 
 export const ProjectsPage: React.FC = () => {
+  const { t } = useTranslation();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const { projects, isLoading, error } = useProjects('public');
+  const [selectedProject, setSelectedProject] = useState<{ id: string; name: string; projectSlug: string; coverImage: string } | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleProjectClick = (e: React.MouseEvent, project: Project) => {
+    const hasUnlocked = localStorage.getItem('hasUnlockedProjects') === 'true';
+    if (isAuthenticated || hasUnlocked) {
+      // Allow the Link to work normally
+      return;
+    } else {
+      e.preventDefault(); // Stop navigation
+      setSelectedProject({ id: project._id, name: project.name, projectSlug: project.slug, coverImage: project.coverImage });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -39,9 +58,9 @@ export const ProjectsPage: React.FC = () => {
       <div className="relative z-10 pt-32 pb-24 min-h-screen flex flex-col">
         <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
         <div className="mb-16">
-          <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4">Our Portfolio</p>
+          <p className="font-label-caps text-[11px] text-tertiary uppercase tracking-[0.3em] mb-4">{t('projectsPage.portfolio')}</p>
           <h1 className="font-display text-display-md md:text-display-xl text-on-surface leading-tight">
-            Exclusive <span className="italic text-tertiary font-light">Residences</span>
+            {t('projectsPage.title')}<span className="italic text-tertiary font-light">{t('projectsPage.titleHighlight')}</span>
           </h1>
         </div>
 
@@ -50,6 +69,7 @@ export const ProjectsPage: React.FC = () => {
             <Link 
               key={project._id} 
               to={`/projects/${project.slug}`}
+              onClick={(e) => handleProjectClick(e, project)}
               className={`group relative w-full aspect-[3/4] overflow-hidden rounded-2xl border border-black/5 shadow-xl hover:shadow-2xl animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-${Math.min(idx * 100, 500)} block`}
             >
               <img 
@@ -61,7 +81,7 @@ export const ProjectsPage: React.FC = () => {
               
               <div className="absolute top-6 left-6 z-10">
                 <span className="inline-block px-3 py-1 bg-black/40 backdrop-blur-md text-white font-label-caps text-[9px] uppercase tracking-[0.2em] rounded-sm">
-                  {project.isPublished ? 'Available' : 'Sold Out'}
+                  {project.isPublished ? t('projectsPage.available') : t('projectsPage.soldOut')}
                 </span>
               </div>
 
@@ -73,8 +93,8 @@ export const ProjectsPage: React.FC = () => {
                   {project.name}
                 </h3>
                 <div className="flex items-center justify-between text-white group-hover:text-tertiary-fixed transition-colors duration-500">
-                  <span className="font-label-caps text-[10px] uppercase tracking-[0.2em]">View Details</span>
-                  <span className="material-symbols-outlined text-sm transform group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
+                  <span className="font-label-caps text-[10px] uppercase tracking-[0.2em]">{t('projectsPage.viewDetails')}</span>
+                  <span className="material-symbols-outlined text-sm transform group-hover:translate-x-2 rtl:group-hover:-translate-x-2 rtl:rotate-180 transition-transform duration-500">arrow_forward</span>
                 </div>
               </div>
             </Link>
@@ -82,6 +102,17 @@ export const ProjectsPage: React.FC = () => {
         </div>
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectUnlockModal
+          isOpen={true}
+          onClose={() => setSelectedProject(null)}
+          projectId={selectedProject.id}
+          projectName={selectedProject.name}
+          projectSlug={selectedProject.projectSlug}
+          coverImage={selectedProject.coverImage}
+        />
+      )}
     </div>
   );
 };

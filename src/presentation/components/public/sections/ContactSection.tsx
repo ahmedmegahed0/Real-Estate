@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useSubmitLead } from '../../../../application/hooks/useLeads';
 import { useSettings } from '../../../../application/hooks/useSettings';
+import { useTranslation } from 'react-i18next';
 
 export const ContactSection: React.FC = () => {
+  const { t } = useTranslation();
   const { submitLead, isSubmitting } = useSubmitLead();
   const { settings } = useSettings();
   const [formData, setFormData] = useState({
@@ -37,10 +39,10 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24">
         <div className="reveal-on-scroll">
           <h2 className="font-display text-display-lg mb-10 leading-none max-md:text-display-md">
-            Ready to Lead the <span className="italic">Market?</span>
+            {t('contact.title')}<span className="italic">{t('contact.titleHighlight')}</span>
           </h2>
           <p className="font-body-lg text-on-surface-variant mb-12 max-w-lg">
-            We selectively partner with developers who share our commitment to architectural excellence. Let's start the conversation.
+            {t('contact.description')}
           </p>
           <div className="space-y-8">
             <div className="flex items-center gap-6 group cursor-pointer">
@@ -62,7 +64,7 @@ export const ContactSection: React.FC = () => {
           <form onSubmit={handleSubmit} className="bg-surface p-12 shadow-xl space-y-8 border border-outline-variant/30 max-md:p-8">
             {success && (
               <div className="bg-[#e4ffec] text-[#006e2a] p-4 font-body-md border border-[#006e2a]/20">
-                Request received. Our team will contact you shortly.
+                {t('contact.success')}
               </div>
             )}
             {error && (
@@ -71,10 +73,10 @@ export const ContactSection: React.FC = () => {
               </div>
             )}
             <div className="space-y-4">
-              <label className="font-label-caps text-[10px] uppercase tracking-widest text-on-surface-variant">Your Information</label>
+              <label className="font-label-caps text-[10px] uppercase tracking-widest text-on-surface-variant">{t('contact.infoLabel')}</label>
               <input 
                 className="w-full bg-surface-container-low border-none p-5 focus:ring-1 focus:ring-tertiary font-body-md text-on-surface placeholder:text-on-surface-variant/50" 
-                placeholder="Full Name" 
+                placeholder={t('contact.fullName')} 
                 type="text"
                 required
                 value={formData.fullName}
@@ -82,7 +84,7 @@ export const ContactSection: React.FC = () => {
               />
               <input 
                 className="w-full bg-surface-container-low border-none p-5 focus:ring-1 focus:ring-tertiary font-body-md text-on-surface placeholder:text-on-surface-variant/50" 
-                placeholder="Corporate Email" 
+                placeholder={t('contact.email')} 
                 type="email"
                 required
                 value={formData.email}
@@ -90,7 +92,7 @@ export const ContactSection: React.FC = () => {
               />
               <input 
                 className="w-full bg-surface-container-low border-none p-5 focus:ring-1 focus:ring-tertiary font-body-md text-on-surface placeholder:text-on-surface-variant/50" 
-                placeholder="Phone Number" 
+                placeholder={t('contact.phone')} 
                 type="tel"
                 required
                 value={formData.phone}
@@ -98,16 +100,16 @@ export const ContactSection: React.FC = () => {
               />
             </div>
             <div className="space-y-4">
-              <label className="font-label-caps text-[10px] uppercase tracking-widest text-on-surface-variant">Project Interest</label>
+              <label className="font-label-caps text-[10px] uppercase tracking-widest text-on-surface-variant">{t('contact.interestLabel')}</label>
               <select 
                 className="w-full bg-surface-container-low border-none p-5 focus:ring-1 focus:ring-tertiary font-body-md text-on-surface"
                 value={formData.interest}
                 onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
               >
-                <option>Residential Development Launch</option>
-                <option>Commercial Portfolio Marketing</option>
-                <option>Global Investor Acquisition</option>
-                <option>Brand Identity Refinement</option>
+                <option value="Residential Development Launch">{t('contact.interestOpt1')}</option>
+                <option value="Commercial Portfolio Marketing">{t('contact.interestOpt2')}</option>
+                <option value="Global Investor Acquisition">{t('contact.interestOpt3')}</option>
+                <option value="Brand Identity Refinement">{t('contact.interestOpt4')}</option>
               </select>
             </div>
             <button 
@@ -115,7 +117,7 @@ export const ContactSection: React.FC = () => {
               disabled={isSubmitting}
               className="w-full bg-on-surface text-surface py-6 font-label-caps text-label-caps uppercase hover:bg-tertiary transition-all tracking-[0.2em] disabled:opacity-50"
             >
-              {isSubmitting ? 'Submitting...' : 'Request Confidential Brief'}
+              {isSubmitting ? t('contact.submitting') : t('contact.submitBtn')}
             </button>
           </form>
         </div>

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../application/hooks/use-auth';
+import { useTranslation } from 'react-i18next';
 
 interface LoginPageProps {
   onSuccess: () => void;
@@ -8,12 +9,20 @@ interface LoginPageProps {
 }
 
 export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPageProps) {
-  const { submitLogin } = useAuth();
+  const { t } = useTranslation();
+  const { submitLogin, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +30,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
     setError('');
 
     if (!email || !password) {
-      setError('Please provide both email and password.');
+      setError(t('login.missingCreds'));
       setIsLoading(false);
       return;
     }
@@ -32,7 +41,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
     if (success) {
       onSuccess();
     } else {
-      setError('Invalid credentials. Please try again.');
+      setError(t('login.invalidCreds'));
     }
   };
 
@@ -42,10 +51,10 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
         to="/" 
         className="absolute top-8 left-8 flex items-center gap-2 text-white/50 hover:text-[#C8A96A] transition-colors font-['Inter'] text-[10px] uppercase tracking-widest z-50 group"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-1 transition-transform">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
         </svg>
-        Back to Website
+        {t('login.back')}
       </Link>
 
       <div className="w-full max-w-md p-10 bg-[#111111]/40 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.6)]">
@@ -57,7 +66,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
           Creative Eye
         </h2>
         <p className="font-['Inter'] text-xs font-medium text-[#6B6B6B] tracking-[0.2em] uppercase">
-          Authorized Personnel Only
+          {t('login.authorizedOnly')}
         </p>
       </div>
 
@@ -83,7 +92,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
             htmlFor="email"
             className="absolute text-[10px] tracking-[0.15em] font-semibold uppercase text-white/50 duration-300 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-focus:text-[#C8A96A] font-['Inter']"
           >
-            Email Address
+            {t('login.emailLabel')}
           </label>
         </div>
 
@@ -102,7 +111,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
             htmlFor="password"
             className="absolute text-[10px] tracking-[0.15em] font-semibold uppercase text-white/50 duration-300 transform -translate-y-3 top-5 left-4 z-10 origin-[0] peer-placeholder-shown:translate-y-0 peer-focus:-translate-y-3 peer-focus:text-[#C8A96A] font-['Inter']"
           >
-            Password
+            {t('login.passwordLabel')}
           </label>
           <button
             type="button"
@@ -129,7 +138,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
             onClick={onNavigateToForgetPassword}
             className="text-[11px] font-['Inter'] text-white/60 hover:text-[#C8A96A] transition-colors bg-transparent border-none tracking-widest uppercase"
           >
-            Forgot Password?
+            {t('login.forgotPassword')}
           </button>
         </div>
 
@@ -139,7 +148,7 @@ export function LoginPage({ onSuccess, onNavigateToForgetPassword }: LoginPagePr
             disabled={isLoading}
             className="relative w-full overflow-hidden bg-gradient-to-r from-[#C8A96A] to-[#D4AF37] text-[#111111] font-['Inter'] font-bold text-xs tracking-[0.2em] uppercase py-4 rounded-xl hover:shadow-[0_0_20px_rgba(200,169,106,0.4)] hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none"
           >
-            <span className="relative z-10">{isLoading ? 'Authenticating...' : 'Sign In'}</span>
+            <span className="relative z-10">{isLoading ? t('login.authenticating') : t('login.signIn')}</span>
           </button>
         </div>
       </form>
