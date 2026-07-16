@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useProjects } from '../../../application/hooks/useProjects';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../../application/hooks/use-auth';
@@ -9,7 +9,6 @@ import type { Project } from '../../../domain/types/project.types';
 export const ProjectsPage: React.FC = () => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
   const { projects, isLoading, error } = useProjects('public');
   const [selectedProject, setSelectedProject] = useState<{ id: string; name: string; projectSlug: string; coverImage: string } | null>(null);
 

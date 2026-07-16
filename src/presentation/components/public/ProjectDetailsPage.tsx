@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useProject } from '../../../application/hooks/useProject';
 import { useProjects } from '../../../application/hooks/useProjects';
 import { useSettings } from '../../../application/hooks/useSettings';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 export const ProjectDetailsPage: React.FC = () => {
   const { t } = useTranslation();
